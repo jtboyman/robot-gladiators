@@ -3,11 +3,11 @@ let playerHealth = 100;
 let playerAttack = 10;
 let playerMoney = 10;
 
-let enemyName = "Roborto";
+let enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 let enemyHealth = 50;
 let enemyAttack = 12;
 
-let fight = function() {
+let fight = function(enemyName) {
     //alert players that they are starting the round
     window.alert("Welcome to ROBOT GLADIATORS!");
 
@@ -90,4 +90,7 @@ let fight = function() {
         }
 };
 
-fight();
+
+for(let i = 0; i < enemyNames.length; i++) {
+    fight(enemyNames[i]);
+}
