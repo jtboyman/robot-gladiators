@@ -126,34 +126,14 @@ let shop = function() {
     switch (shopOptionPrompt) {
         case "refill":
         case "REFILL":
-            if (playerInfo.money >=7) {
-            window.alert("Refilling player's health by 20 for 7 dollars.");
-
-            //increase ealth and decrease money
-            playerInfo.health = playerInfo.health + 20;
-            playerInfo.money = playerInfo.money - 7;
-            }
-            else {
-                window.alert("You don't have enough money!");
-            }
-
+            playerInfo.refillHealth();
             break;
-        
+
         case "upgrade":
         case "UPGRADE":
-            if (playerInfo.money >=7) {
-            window.alert("Upgrading player's attack by 6 for 7 dollars.");
-
-            //increase attack and decrease money
-            playerInfo.attack = playerInfo.attack + 6;
-            playerInfo.money = playerInfo.money - 7;
-            }
-            else {
-                window.alert("You don't have enough money!")
-            }
-
+            playerInfo.upgradeAttack();
             break;
-
+            
         case "leave":
         case "LEAVE":
             window.alert("Leaving the store.");
@@ -185,6 +165,26 @@ let playerInfo = {
         this.health = 100;
         this.money = 10;
         this.attack = 10;
+    },
+    refillHealth: function() {
+        if (this.money >= 7) {
+            window.alert("Refilling player's health by 20 for 7 dollars.");
+            this.health += 20;
+            this.money -= 7;
+        }
+        else {
+            window.alert("You don't have enough money!");
+        }
+    },
+    upgradeAttack: function() {
+        if (this.money >=7) {
+            window.alert("Upgrading player's attack by 6 for 7 dollars.");
+            this.attack += 6;
+            this.money -= 7;
+        } else {
+            window.alert("You don't have enough money!");
+        }
+
     }
 };
 
