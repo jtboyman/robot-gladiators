@@ -1,3 +1,4 @@
+alert("Welcome to Robot Gladiators!")
 const playerName = prompt("What is your robot's name?");
 let playerHealth = 100;
 let playerAttack = 10;
@@ -32,7 +33,7 @@ let fight = function (enemyName) {
     else {
         fight();
     }
-  window.alert(playerName + " has chosen to skip the fight!");
+
 }
     
 // if player choses to fight, then fight
@@ -60,7 +61,8 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
     // check player's health
     if (playerHealth <= 0) {
       window.alert(playerName + " has died!");
-      break;
+      window.alert("You have lost your robot in battle! Game Over! :(");
+        break;
     } else {
       window.alert(playerName + " still has " + playerHealth + " health left.");
     }
@@ -68,8 +70,12 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
     };
 };
 
-for(var i = 0; i < enemyNames.length; i++) {
-    let pickedEnemyName = enemyNames[i];
-    enemyHealth = 50;
-    fight(pickedEnemyName);
+for(let i = 0; i < enemyNames.length; i++) {
+    if (playerHealth > 0) {
+        //let player know what round they are in
+        window.alert("Welcome to Robot Gladiators! Round " + (i + 1) );
+        let pickedEnemyName = enemyNames[i];
+        enemyHealth = 50;
+        fight(pickedEnemyName);
+    }
 }
