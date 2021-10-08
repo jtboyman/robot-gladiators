@@ -70,12 +70,47 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
     };
 };
 
-for(let i = 0; i < enemyNames.length; i++) {
+//function to start a new game
+let startGame = function() {
+    //reset player stats
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
+
+    for(let i = 0; i < enemyNames.length; i++) {
+        if (playerHealth > 0) {
+            //let player know what round they are in
+            window.alert("Welcome to Robot Gladiators! Round " + (i + 1) );
+            let pickedEnemyName = enemyNames[i];
+            enemyHealth = 50;
+            fight(pickedEnemyName);
+        }
+    }
+
+    //after the loop ends, player is either out of health or enemies to fight, so run the endGame function
+    endGame();
+};
+
+//function to end the game
+let endGame = function() {
+    //if player is still alive, player wins!
     if (playerHealth > 0) {
-        //let player know what round they are in
-        window.alert("Welcome to Robot Gladiators! Round " + (i + 1) );
-        let pickedEnemyName = enemyNames[i];
-        enemyHealth = 50;
-        fight(pickedEnemyName);
+        window.alert("Great job, you've survived Robot Gladiators! You now have a score of " + playerMoney + ".");
+    }
+    else {
+        window.alert("You've lost your robot in battle.");
+    }
+
+    let playAgainConfirm = window.confirm("Would you like to play again?");
+
+    if (playAgainConfirm) {
+        //restart the game
+        startGame();
+    }
+    else {
+        window.alert("Thank you for playing Robot Gladiators! Come back soon!");
     }
 }
+
+//start the game when the page loads
+startGame();
