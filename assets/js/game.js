@@ -1,32 +1,42 @@
 alert("Welcome to Robot Gladiators!")
 
+var fightOrSkip = function() {
+    // ask player if they'd like to fight or skip using fightOrSkip function
+    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+  
+    //conditional recursive function call
+    if (promptFight === "" || promptFight === null) {
+        window.alert("You need to proivde a valid answer! Please try again.");
+        return fightOrSkip();
+    }
+  
+    promptFight = promptFight.toLowerCase();
+    if (promptFight === "skip") {
+      // confirm player wants to skip
+      var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+  
+      // if yes (true), leave fight
+      if (confirmSkip) {
+        window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+        // subtract money from playerMoney for skipping
+        playerInfo.playerMoney = playerInfo.money - 10;
+
+        //return true if player wants to leave
+        return true;
+      }
+      shop();
+    }
+  }
+
 let fight = function (enemy) {
 
     //repeat and execute as long as the enemy robot is alive
     while (playerInfo.health > 0 && enemy.health > 0) {
 
-    let promptFight = prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
-
-    // if player choses to skip
-    if (promptFight === "skip" || promptFight === "SKIP") {
-    //confirm player wants to skip
-    let confirmSkip = confirm("Are you sure you'd like to quit?");
-
-    //if true, leave fight
-    if (confirmSkip) {
-        alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-          //subtract money from playerInfo.money for skipping
-          playerInfo.money = Math.max(0, playerInfo.money - 10);
-          console.log("playerInfo.money", playerInfo.money);
-          break;
+    if (fightOrSkip()); {
+        //if true, leave fight by breaking loop
+        break;
     }
-
-    //if false, ask question again by running fight() again
-    else {
-        fight();
-    }
-
-}
     
 // if player choses to fight, then fight
 if (promptFight === "fight" || promptFight === "FIGHT") {
@@ -65,7 +75,6 @@ if (promptFight === "fight" || promptFight === "FIGHT") {
         };
     };
 };
-
 //function to start a new game
 let startGame = function() {
     //reset player stats
